@@ -1,0 +1,632 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		184730D02F3644F30029F291 /* SmartTaskApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184730CF2F3644F30029F291 /* SmartTaskApp.swift */; };
+		184730D22F3644F30029F291 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184730D12F3644F30029F291 /* ContentView.swift */; };
+		184730D42F3644F40029F291 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184730D32F3644F40029F291 /* Assets.xcassets */; };
+		184730D72F3644F40029F291 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184730D62F3644F40029F291 /* Preview Assets.xcassets */; };
+		184730E12F3644F40029F291 /* SmartTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184730E02F3644F40029F291 /* SmartTaskTests.swift */; };
+		184730EB2F3644F40029F291 /* SmartTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184730EA2F3644F40029F291 /* SmartTaskUITests.swift */; };
+		184730ED2F3644F40029F291 /* SmartTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184730EC2F3644F40029F291 /* SmartTaskUITestsLaunchTests.swift */; };
+		184731042F3648E00029F291 /* TaskIterm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184731032F3648E00029F291 /* TaskIterm.swift */; };
+		1847310B2F3649760029F291 /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847310A2F3649760029F291 /* AddTaskSheet.swift */; };
+		1847310D2F3649900029F291 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847310C2F3649900029F291 /* TaskListView.swift */; };
+		1847310F2F3649C90029F291 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847310E2F3649C90029F291 /* TaskRow.swift */; };
+		874277412F398F15002DF8A7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874277402F398F14002DF8A7 /* Task.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		184730DD2F3644F40029F291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184730C42F3644F30029F291 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 184730CB2F3644F30029F291;
+			remoteInfo = SmartTask;
+		};
+		184730E72F3644F40029F291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184730C42F3644F30029F291 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 184730CB2F3644F30029F291;
+			remoteInfo = SmartTask;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		184730CC2F3644F30029F291 /* SmartTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		184730CF2F3644F30029F291 /* SmartTaskApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTaskApp.swift; sourceTree = "<group>"; };
+		184730D12F3644F30029F291 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		184730D32F3644F40029F291 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		184730D62F3644F40029F291 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		184730DC2F3644F40029F291 /* SmartTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		184730E02F3644F40029F291 /* SmartTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTaskTests.swift; sourceTree = "<group>"; };
+		184730E62F3644F40029F291 /* SmartTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		184730EA2F3644F40029F291 /* SmartTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTaskUITests.swift; sourceTree = "<group>"; };
+		184730EC2F3644F40029F291 /* SmartTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		184731032F3648E00029F291 /* TaskIterm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskIterm.swift; sourceTree = "<group>"; };
+		1847310A2F3649760029F291 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
+		1847310C2F3649900029F291 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		1847310E2F3649C90029F291 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		874277402F398F14002DF8A7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		184730C92F3644F30029F291 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		184730D92F3644F40029F291 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		184730E32F3644F40029F291 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		184730C32F3644F30029F291 = {
+			isa = PBXGroup;
+			children = (
+				184730CE2F3644F30029F291 /* SmartTask */,
+				184730DF2F3644F40029F291 /* SmartTaskTests */,
+				184730E92F3644F40029F291 /* SmartTaskUITests */,
+				184730CD2F3644F30029F291 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		184730CD2F3644F30029F291 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				184730CC2F3644F30029F291 /* SmartTask.app */,
+				184730DC2F3644F40029F291 /* SmartTaskTests.xctest */,
+				184730E62F3644F40029F291 /* SmartTaskUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		184730CE2F3644F30029F291 /* SmartTask */ = {
+			isa = PBXGroup;
+			children = (
+				184731092F3649530029F291 /* Views */,
+				184731062F3649080029F291 /* Persistence */,
+				184730FE2F36478B0029F291 /* Models */,
+				184730F92F3647210029F291 /* Managers */,
+				184730CF2F3644F30029F291 /* SmartTaskApp.swift */,
+				184730D12F3644F30029F291 /* ContentView.swift */,
+				184730D32F3644F40029F291 /* Assets.xcassets */,
+				184730D52F3644F40029F291 /* Preview Content */,
+			);
+			path = SmartTask;
+			sourceTree = "<group>";
+		};
+		184730D52F3644F40029F291 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				184730D62F3644F40029F291 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		184730DF2F3644F40029F291 /* SmartTaskTests */ = {
+			isa = PBXGroup;
+			children = (
+				184730E02F3644F40029F291 /* SmartTaskTests.swift */,
+			);
+			path = SmartTaskTests;
+			sourceTree = "<group>";
+		};
+		184730E92F3644F40029F291 /* SmartTaskUITests */ = {
+			isa = PBXGroup;
+			children = (
+				184730EA2F3644F40029F291 /* SmartTaskUITests.swift */,
+				184730EC2F3644F40029F291 /* SmartTaskUITestsLaunchTests.swift */,
+			);
+			path = SmartTaskUITests;
+			sourceTree = "<group>";
+		};
+		184730F92F3647210029F291 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		184730FE2F36478B0029F291 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				874277402F398F14002DF8A7 /* Task.swift */,
+				184731032F3648E00029F291 /* TaskIterm.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		184731062F3649080029F291 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		184731092F3649530029F291 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1847310A2F3649760029F291 /* AddTaskSheet.swift */,
+				1847310C2F3649900029F291 /* TaskListView.swift */,
+				1847310E2F3649C90029F291 /* TaskRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		184730CB2F3644F30029F291 /* SmartTask */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 184730F02F3644F40029F291 /* Build configuration list for PBXNativeTarget "SmartTask" */;
+			buildPhases = (
+				184730C82F3644F30029F291 /* Sources */,
+				184730C92F3644F30029F291 /* Frameworks */,
+				184730CA2F3644F30029F291 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartTask;
+			productName = SmartTask;
+			productReference = 184730CC2F3644F30029F291 /* SmartTask.app */;
+			productType = "com.apple.product-type.application";
+		};
+		184730DB2F3644F40029F291 /* SmartTaskTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 184730F32F3644F40029F291 /* Build configuration list for PBXNativeTarget "SmartTaskTests" */;
+			buildPhases = (
+				184730D82F3644F40029F291 /* Sources */,
+				184730D92F3644F40029F291 /* Frameworks */,
+				184730DA2F3644F40029F291 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				184730DE2F3644F40029F291 /* PBXTargetDependency */,
+			);
+			name = SmartTaskTests;
+			productName = SmartTaskTests;
+			productReference = 184730DC2F3644F40029F291 /* SmartTaskTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		184730E52F3644F40029F291 /* SmartTaskUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 184730F62F3644F40029F291 /* Build configuration list for PBXNativeTarget "SmartTaskUITests" */;
+			buildPhases = (
+				184730E22F3644F40029F291 /* Sources */,
+				184730E32F3644F40029F291 /* Frameworks */,
+				184730E42F3644F40029F291 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				184730E82F3644F40029F291 /* PBXTargetDependency */,
+			);
+			name = SmartTaskUITests;
+			productName = SmartTaskUITests;
+			productReference = 184730E62F3644F40029F291 /* SmartTaskUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		184730C42F3644F30029F291 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					184730CB2F3644F30029F291 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					184730DB2F3644F40029F291 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 184730CB2F3644F30029F291;
+					};
+					184730E52F3644F40029F291 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 184730CB2F3644F30029F291;
+					};
+				};
+			};
+			buildConfigurationList = 184730C72F3644F30029F291 /* Build configuration list for PBXProject "SmartTask" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 184730C32F3644F30029F291;
+			productRefGroup = 184730CD2F3644F30029F291 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				184730CB2F3644F30029F291 /* SmartTask */,
+				184730DB2F3644F40029F291 /* SmartTaskTests */,
+				184730E52F3644F40029F291 /* SmartTaskUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		184730CA2F3644F30029F291 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				184730D72F3644F40029F291 /* Preview Assets.xcassets in Resources */,
+				184730D42F3644F40029F291 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		184730DA2F3644F40029F291 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		184730E42F3644F40029F291 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		184730C82F3644F30029F291 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1847310B2F3649760029F291 /* AddTaskSheet.swift in Sources */,
+				1847310D2F3649900029F291 /* TaskListView.swift in Sources */,
+				184731042F3648E00029F291 /* TaskIterm.swift in Sources */,
+				184730D22F3644F30029F291 /* ContentView.swift in Sources */,
+				1847310F2F3649C90029F291 /* TaskRow.swift in Sources */,
+				874277412F398F15002DF8A7 /* Task.swift in Sources */,
+				184730D02F3644F30029F291 /* SmartTaskApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		184730D82F3644F40029F291 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				184730E12F3644F40029F291 /* SmartTaskTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		184730E22F3644F40029F291 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				184730EB2F3644F40029F291 /* SmartTaskUITests.swift in Sources */,
+				184730ED2F3644F40029F291 /* SmartTaskUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		184730DE2F3644F40029F291 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 184730CB2F3644F30029F291 /* SmartTask */;
+			targetProxy = 184730DD2F3644F40029F291 /* PBXContainerItemProxy */;
+		};
+		184730E82F3644F40029F291 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 184730CB2F3644F30029F291 /* SmartTask */;
+			targetProxy = 184730E72F3644F40029F291 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		184730EE2F3644F40029F291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		184730EF2F3644F40029F291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		184730F12F3644F40029F291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SmartTask/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.georgebrown.comp3037.SmartTask;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		184730F22F3644F40029F291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SmartTask/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.georgebrown.comp3037.SmartTask;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		184730F42F3644F40029F291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.georgebrown.comp3037.SmartTaskTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartTask.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SmartTask";
+			};
+			name = Debug;
+		};
+		184730F52F3644F40029F291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.georgebrown.comp3037.SmartTaskTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartTask.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SmartTask";
+			};
+			name = Release;
+		};
+		184730F72F3644F40029F291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.georgebrown.comp3037.SmartTaskUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SmartTask;
+			};
+			name = Debug;
+		};
+		184730F82F3644F40029F291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.georgebrown.comp3037.SmartTaskUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SmartTask;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		184730C72F3644F30029F291 /* Build configuration list for PBXProject "SmartTask" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				184730EE2F3644F40029F291 /* Debug */,
+				184730EF2F3644F40029F291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		184730F02F3644F40029F291 /* Build configuration list for PBXNativeTarget "SmartTask" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				184730F12F3644F40029F291 /* Debug */,
+				184730F22F3644F40029F291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		184730F32F3644F40029F291 /* Build configuration list for PBXNativeTarget "SmartTaskTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				184730F42F3644F40029F291 /* Debug */,
+				184730F52F3644F40029F291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		184730F62F3644F40029F291 /* Build configuration list for PBXNativeTarget "SmartTaskUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				184730F72F3644F40029F291 /* Debug */,
+				184730F82F3644F40029F291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 184730C42F3644F30029F291 /* Project object */;
+}
