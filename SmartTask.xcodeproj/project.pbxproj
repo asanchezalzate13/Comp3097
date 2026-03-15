@@ -22,6 +22,7 @@
 		8708436D2F665B59008C93AB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708436C2F665B59008C93AB /* PersistenceController.swift */; };
 		8708436F2F665FBB008C93AB /* TaskEntity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708436E2F665FBB008C93AB /* TaskEntity+Extensions.swift */; };
 		874277412F398F15002DF8A7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874277402F398F14002DF8A7 /* Task.swift */; };
+		87BCDB792F675AE40012B145 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BCDB782F675AD90012B145 /* NotificationsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		8708436C2F665B59008C93AB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		8708436E2F665FBB008C93AB /* TaskEntity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEntity+Extensions.swift"; sourceTree = "<group>"; };
 		874277402F398F14002DF8A7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		87BCDB782F675AD90012B145 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		184730F92F3647210029F291 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				87BCDB782F675AD90012B145 /* NotificationsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				8708436B2F66384A008C93AB /* SmartTask.xcdatamodeld in Sources */,
 				1847310B2F3649760029F291 /* AddTaskSheet.swift in Sources */,
 				1847310D2F3649900029F291 /* TaskListView.swift in Sources */,
+				87BCDB792F675AE40012B145 /* NotificationsManager.swift in Sources */,
 				184731042F3648E00029F291 /* TaskIterm.swift in Sources */,
 				184730D22F3644F30029F291 /* ContentView.swift in Sources */,
 				1847310F2F3649C90029F291 /* TaskRow.swift in Sources */,
