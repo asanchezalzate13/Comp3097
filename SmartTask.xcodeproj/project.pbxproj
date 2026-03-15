@@ -18,6 +18,7 @@
 		1847310B2F3649760029F291 /* AddTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847310A2F3649760029F291 /* AddTaskSheet.swift */; };
 		1847310D2F3649900029F291 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847310C2F3649900029F291 /* TaskListView.swift */; };
 		1847310F2F3649C90029F291 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847310E2F3649C90029F291 /* TaskRow.swift */; };
+		8708436B2F66384A008C93AB /* SmartTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 870843682F66384A008C93AB /* SmartTask.xcdatamodeld */; };
 		874277412F398F15002DF8A7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874277402F398F14002DF8A7 /* Task.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		1847310A2F3649760029F291 /* AddTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSheet.swift; sourceTree = "<group>"; };
 		1847310C2F3649900029F291 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		1847310E2F3649C90029F291 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		8708436A2F66384A008C93AB /* SmartTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmartTask.xcdatamodel; sourceTree = "<group>"; };
 		874277402F398F14002DF8A7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				184730D12F3644F30029F291 /* ContentView.swift */,
 				184730D32F3644F40029F291 /* Assets.xcassets */,
 				184730D52F3644F40029F291 /* Preview Content */,
+				870843682F66384A008C93AB /* SmartTask.xcdatamodeld */,
 			);
 			path = SmartTask;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8708436B2F66384A008C93AB /* SmartTask.xcdatamodeld in Sources */,
 				1847310B2F3649760029F291 /* AddTaskSheet.swift in Sources */,
 				1847310D2F3649900029F291 /* TaskListView.swift in Sources */,
 				184731042F3648E00029F291 /* TaskIterm.swift in Sources */,
@@ -627,6 +631,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		870843682F66384A008C93AB /* SmartTask.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8708436A2F66384A008C93AB /* SmartTask.xcdatamodel */,
+			);
+			currentVersion = 8708436A2F66384A008C93AB /* SmartTask.xcdatamodel */;
+			path = SmartTask.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 184730C42F3644F30029F291 /* Project object */;
 }
