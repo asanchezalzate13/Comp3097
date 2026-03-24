@@ -1,19 +1,25 @@
 import SwiftUI
-
+import CoreData
 
 struct TaskListView: View {
-    //mock data for ui display
-    @State private var tasks: [Task] = Task.sampleTasks
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.dueDate, ascending: true)],
+        animation: .default
+    )
+    private var taskEntities: FetchedResults<TaskEntity>
+
     @State private var showAddTask = false
-    
+
     private var pendingCount: Int {
-        tasks.filter { !$0.isCompleted }.count
+        taskEntities.filter { !$0.isCompleted }.count
     }
-    
+
     private var completedCount: Int {
-        tasks.filter { $0.isCompleted }.count
+        taskEntities.filter { $0.isCompleted }.count
     }
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -35,24 +41,24 @@ struct TaskListView: View {
                     }
                 }
                 .padding()
-                
-                if tasks.isEmpty {
+
+                if taskEntities.isEmpty {
                     VStack(spacing: 20) {
                         Spacer()
                         Image(systemName: "tray")
                             .font(.system(size: 64))
                             .foregroundColor(.secondary)
-                        
+
                         Text("No tasks yet")
                             .font(.title2)
                             .fontWeight(.bold)
-                        
+
                         Text("Get started by adding your first task")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
-                        
+
                         Button(action: {
                             showAddTask = true
                         }) {
@@ -66,23 +72,26 @@ struct TaskListView: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }else {
+                } else {
                     List {
-                        ForEach(tasks) { task in
+                        ForEach(taskEntities, id: \.objectID) { entity in
                             TaskRow(
-                                task: task,
+                                task: entity.toTask(),
                                 onToggleComplete: {
-                                   
-                                    print("Toggle completion tapped for: \(task.title)")
+                                    toggleComplete(entity: entity)
                                 },
                                 onDelete: {
-                                    
-                                    print("Delete tapped for: \(task.title)")
+                                    deleteTask(entity: entity)
                                 }
                             )
                             .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 16))
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color(.secondarySystemGroupedBackground))
+                        }
+                        .onDelete { indexSet in
+                            for index in indexSet {
+                                deleteTask(entity: taskEntities[index])
+                            }
                         }
                     }
                     .listStyle(.plain)
@@ -93,5 +102,25 @@ struct TaskListView: View {
                 AddTaskSheet()
             }
         }
+    }
+
+    private func toggleComplete(entity: TaskEntity) {
+        entity.toggleCompletion()
+        if let id = entity.id {
+            if entity.isCompleted {
+                NotificationManager.shared.cancelNotification(taskId: id)
+            } else if let date = entity.dueDate, let title = entity.title {
+                NotificationManager.shared.scheduleNotification(taskId: id, title: title, dueDate: date)
+            }
+        }
+        PersistenceController.shared.save()
+    }
+
+    private func deleteTask(entity: TaskEntity) {
+        if let id = entity.id {
+            NotificationManager.shared.cancelNotification(taskId: id)
+        }
+        viewContext.delete(entity)
+        PersistenceController.shared.save()
     }
 }
