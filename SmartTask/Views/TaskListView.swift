@@ -1,17 +1,25 @@
 import SwiftUI
+import CoreData
 
 struct TaskListView: View {
-    @State private var tasks = Task.sampleTasks
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.dueDate, ascending: true)],
+        animation: .default
+    )
+    private var taskEntities: FetchedResults<TaskEntity>
+
     @State private var showAddTask = false
     @State private var taskToEdit: Task? = nil
     @State private var navigationPath = NavigationPath()
 
     private var pendingCount: Int {
-        tasks.filter { !$0.isCompleted }.count
+        taskEntities.filter { !$0.isCompleted }.count
     }
 
     private var completedCount: Int {
-        tasks.filter { $0.isCompleted }.count
+        taskEntities.filter { $0.isCompleted }.count
     }
 
     var body: some View {
@@ -33,7 +41,7 @@ struct TaskListView: View {
     private var mainColumn: some View {
         VStack(spacing: 0) {
             headerBar
-            if tasks.isEmpty {
+            if taskEntities.isEmpty {
                 emptyState
             } else {
                 taskList
@@ -96,15 +104,26 @@ struct TaskListView: View {
 
     private var taskList: some View {
         List {
-            ForEach(Array(tasks.enumerated()), id: \.element.id) { index, task in
-                taskRow(index: index, task: task)
+            ForEach(Array(taskEntities), id: \.objectID) { entity in
+                taskRow(entity: entity)
             }
         }
         .listStyle(.plain)
     }
 
-    private func taskRow(index: Int, task: Task) -> some View {
-        HStack(alignment: .top, spacing: 0) {
+    private func taskBinding(for entity: TaskEntity) -> Binding<Task> {
+        Binding(
+            get: { entity.toTask() },
+            set: { new in
+                entity.update(from: new)
+                PersistenceController.shared.save()
+            }
+        )
+    }
+
+    private func taskRow(entity: TaskEntity) -> some View {
+        let task = entity.toTask()
+        return HStack(alignment: .top, spacing: 0) {
             Button {
                 navigationPath.append(task.id)
             } label: {
@@ -115,11 +134,12 @@ struct TaskListView: View {
             .buttonStyle(.plain)
 
             Button {
-                tasks[index].isCompleted.toggle()
+                entity.isCompleted.toggle()
+                PersistenceController.shared.save()
             } label: {
-                Image(systemName: tasks[index].isCompleted ? "checkmark.circle.fill" : "circle")
+                Image(systemName: entity.isCompleted ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
-                    .foregroundStyle(tasks[index].isCompleted ? .green : .secondary)
+                    .foregroundStyle(entity.isCompleted ? .green : .secondary)
             }
             .buttonStyle(.plain)
             .padding(.trailing, 4)
@@ -133,7 +153,7 @@ struct TaskListView: View {
         .listRowBackground(Color(.secondarySystemGroupedBackground))
         .swipeActions(edge: .trailing) {
             Button {
-                taskToEdit = task
+                taskToEdit = entity.toTask()
             } label: {
                 Label("Edit", systemImage: "pencil")
             }
@@ -143,11 +163,12 @@ struct TaskListView: View {
 
     @ViewBuilder
     private func detailView(for taskId: UUID) -> some View {
-        if let index = tasks.firstIndex(where: { $0.id == taskId }) {
+        if let entity = taskEntities.first(where: { $0.id == taskId }) {
             TaskDetailView(
-                task: $tasks[index],
+                task: taskBinding(for: entity),
                 onDelete: {
-                    tasks.removeAll { $0.id == taskId }
+                    viewContext.delete(entity)
+                    PersistenceController.shared.save()
                 }
             )
         } else {
@@ -157,10 +178,15 @@ struct TaskListView: View {
 
     @ViewBuilder
     private func editSheetContent(for task: Task) -> some View {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            EditTaskSheet(task: $tasks[index])
+        if let entity = taskEntities.first(where: { $0.id == task.id }) {
+            EditTaskSheet(task: taskBinding(for: entity))
         } else {
             EmptyView()
         }
     }
+}
+
+#Preview {
+    TaskListView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

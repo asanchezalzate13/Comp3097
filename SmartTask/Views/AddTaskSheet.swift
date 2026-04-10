@@ -1,8 +1,10 @@
 import SwiftUI
+import CoreData
 
 struct AddTaskSheet: View {
     @Environment(\.dismiss) private var dismiss
-    
+    @Environment(\.managedObjectContext) private var viewContext
+
     @State private var title = ""
     @State private var dueDate = Date()
     @State private var selectedType: TaskType = .assignment
@@ -54,15 +56,15 @@ struct AddTaskSheet: View {
     private func saveTask() {
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
-        
-        
-        print("=== UI-ONLY: Task would be saved ===")
-        print("Title: \(trimmedTitle)")
-        print("Due Date: \(dueDate)")
-        print("Type: \(selectedType.displayName)")
-        print("Notes: \(notes)")
-        print("=====================================")
-        
+
+        _ = TaskEntity(
+            context: viewContext,
+            title: trimmedTitle,
+            dueDate: dueDate,
+            type: selectedType,
+            notes: notes
+        )
+        PersistenceController.shared.save()
         dismiss()
     }
 }
