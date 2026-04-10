@@ -6,8 +6,14 @@ import SwiftUI
 /// - Green: Completed
 struct TaskRow: View {
     let task: Task
-    let onToggleComplete: () -> Void
-    let onDelete: () -> Void
+    init(
+            task: Task,
+            onToggleComplete: @escaping () -> Void = {},
+            onDelete: @escaping () -> Void = {}
+        ) {
+            self.task = task
+            _ = (onToggleComplete, onDelete)
+        }
     
     private var borderColor: Color {
         if task.isCompleted {
@@ -56,18 +62,6 @@ struct TaskRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            Button {
-                onToggleComplete()
-            } label: {
-                Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .font(.title2)
-                    .foregroundStyle(task.isCompleted ? .green : .secondary)
-            }
-            .buttonStyle(.plain)
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 12)
-        .background(Color(.systemBackground))
-        .contentShape(Rectangle())
     }
 }
