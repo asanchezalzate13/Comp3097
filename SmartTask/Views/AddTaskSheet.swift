@@ -57,14 +57,24 @@ struct AddTaskSheet: View {
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
-        _ = TaskEntity(
-            context: viewContext,
-            title: trimmedTitle,
-            dueDate: dueDate,
-            type: selectedType,
-            notes: notes
-        )
+        let newTask = TaskEntity(
+                context: viewContext,
+                title: trimmedTitle,
+                dueDate: dueDate,
+                type: selectedType,
+                notes: notes
+            )
         PersistenceController.shared.save()
-        dismiss()
-    }
+            
+            // Schedule notification for the new task
+            if let taskId = newTask.id {
+                NotificationManager.shared.scheduleNotification(
+                    taskId: taskId,
+                    title: trimmedTitle,
+                    dueDate: dueDate
+                )
+            }
+            
+            dismiss()
+        }
 }
