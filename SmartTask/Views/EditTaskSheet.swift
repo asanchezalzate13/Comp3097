@@ -93,6 +93,14 @@ struct EditTaskSheet: View {
                 entity.taskType = selectedType.rawValue
                 entity.notes    = notes
                 PersistenceController.shared.save()
+                
+                // Reschedule notification with updated details
+                // This automatically cancels the old notification and creates a new one
+                NotificationManager.shared.scheduleNotification(
+                    taskId: task.id,
+                    title: trimmedTitle,
+                    dueDate: dueDate
+                )
             }
         } catch {
             print("Failed to fetch task for editing: \(error)")
