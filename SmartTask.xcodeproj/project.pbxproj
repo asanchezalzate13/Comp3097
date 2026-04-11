@@ -24,6 +24,7 @@
 		874277412F398F15002DF8A7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874277402F398F14002DF8A7 /* Task.swift */; };
 		876EB25C2F894D4600F5481D /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EB25B2F894D3D00F5481D /* TaskDetailView.swift */; };
 		876EB2602F894F6F00F5481D /* EditTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EB25F2F894F6700F5481D /* EditTaskSheet.swift */; };
+		877890A92F8AD4D200DEFF6B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877890A82F8AD4D200DEFF6B /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		874277402F398F14002DF8A7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		876EB25B2F894D3D00F5481D /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		876EB25F2F894F6700F5481D /* EditTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskSheet.swift; sourceTree = "<group>"; };
+		877890A82F8AD4D200DEFF6B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		184730F92F3647210029F291 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				877890A82F8AD4D200DEFF6B /* NotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				1847310D2F3649900029F291 /* TaskListView.swift in Sources */,
 				184731042F3648E00029F291 /* TaskIterm.swift in Sources */,
 				184730D22F3644F30029F291 /* ContentView.swift in Sources */,
+				877890A92F8AD4D200DEFF6B /* NotificationManager.swift in Sources */,
 				1847310F2F3649C90029F291 /* TaskRow.swift in Sources */,
 				876EB25C2F894D4600F5481D /* TaskDetailView.swift in Sources */,
 				874277412F398F15002DF8A7 /* Task.swift in Sources */,
