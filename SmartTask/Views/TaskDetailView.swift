@@ -59,6 +59,8 @@ struct TaskDetailView: View {
         .alert("Delete task?", isPresented: $showDeleteConfirm) {
             Button("Cancel", role: .cancel) {}
             Button("Delete", role: .destructive) {
+                // Cancel notification before deleting the task
+                NotificationManager.shared.cancelNotification(taskId: task.id)
                 onDelete()
                 dismiss()
             }
@@ -214,6 +216,17 @@ struct TaskDetailView: View {
             Spacer()
             Button {
                 task.isCompleted.toggle()
+
+                // Cancel notification if completed, reschedule if uncompleted
+                if task.isCompleted {
+                    NotificationManager.shared.cancelNotification(taskId: task.id)
+                } else {
+                    NotificationManager.shared.scheduleNotification(
+                        taskId: task.id,
+                        title: task.title,
+                        dueDate: task.dueDate
+                    )
+                }
             } label: {
                 HStack(spacing: 8) {
                     Image(systemName: task.isCompleted ? "arrow.uturn.backward.circle.fill" : "checkmark.circle.fill")
