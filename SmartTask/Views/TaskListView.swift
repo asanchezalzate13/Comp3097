@@ -136,6 +136,20 @@ struct TaskListView: View {
             Button {
                 entity.isCompleted.toggle()
                 PersistenceController.shared.save()
+
+                // Cancel notification if task is completed, reschedule if uncompleted
+                if let taskId = entity.id {
+                    if entity.isCompleted {
+                        NotificationManager.shared.cancelNotification(taskId: taskId)
+                    } else {
+                        // Reschedule if user marks it incomplete again
+                        NotificationManager.shared.scheduleNotification(
+                            taskId: taskId,
+                            title: entity.title ?? "",
+                            dueDate: entity.dueDate ?? Date()
+                        )
+                    }
+                }
             } label: {
                 Image(systemName: entity.isCompleted ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
