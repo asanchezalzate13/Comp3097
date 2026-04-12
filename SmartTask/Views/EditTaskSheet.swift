@@ -1,7 +1,3 @@
-//
-//  EditTaskSheet.swift
-//  SmartTask
-//
 import SwiftUI
 import CoreData
 
@@ -57,7 +53,6 @@ struct EditTaskSheet: View {
                 }
             }
             .onAppear {
-                // Pre-fill fields with the existing task's values
                 title        = task.title
                 dueDate      = task.dueDate
                 selectedType = task.type
@@ -66,21 +61,11 @@ struct EditTaskSheet: View {
         }
     }
 
-    // MARK: - Save to Core Data
-
-    // MARK: - Save changes
-
     private func saveChanges() {
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
-        // Update the binding so the list reflects changes immediately
-        task.title   = trimmedTitle
-        task.dueDate = dueDate
-        task.type    = selectedType
-        task.notes   = notes
-
-        // Also persist to Core Data
+        // Fetch the Core Data entity directly and update it
         let request: NSFetchRequest<TaskEntity> = TaskEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", task.id as CVarArg)
         request.fetchLimit = 1
@@ -92,10 +77,15 @@ struct EditTaskSheet: View {
                 entity.dueDate  = dueDate
                 entity.taskType = selectedType.rawValue
                 entity.notes    = notes
+
+                // Update the binding so detail view reflects changes immediately
+                task.title   = trimmedTitle
+                task.dueDate = dueDate
+                task.type    = selectedType
+                task.notes   = notes
+
                 PersistenceController.shared.save()
-                
-                // Reschedule notification with updated details
-                // This automatically cancels the old notification and creates a new one
+
                 NotificationManager.shared.scheduleNotification(
                     taskId: task.id,
                     title: trimmedTitle,
@@ -109,4 +99,3 @@ struct EditTaskSheet: View {
         dismiss()
     }
 }
-

@@ -137,12 +137,10 @@ struct TaskListView: View {
                 entity.isCompleted.toggle()
                 PersistenceController.shared.save()
 
-                // Cancel notification if task is completed, reschedule if uncompleted
                 if let taskId = entity.id {
                     if entity.isCompleted {
                         NotificationManager.shared.cancelNotification(taskId: taskId)
                     } else {
-                        // Reschedule if user marks it incomplete again
                         NotificationManager.shared.scheduleNotification(
                             taskId: taskId,
                             title: entity.title ?? "",
@@ -183,6 +181,9 @@ struct TaskListView: View {
                 onDelete: {
                     viewContext.delete(entity)
                     PersistenceController.shared.save()
+                },
+                onBack: {
+                    navigationPath.removeLast()
                 }
             )
         } else {

@@ -2,17 +2,14 @@
 //  TaskDetailView.swift
 //  SmartTask
 //
-//  Created by user289899 on 4/10/26.
-//
 
 import SwiftUI
 
-/// Full task details with status, mark complete, edit, and delete (matches project mockups).
 struct TaskDetailView: View {
     @Binding var task: Task
     var onDelete: () -> Void
+    var onBack: () -> Void
 
-    @Environment(\.dismiss) private var dismiss
     @State private var showEditSheet = false
     @State private var showDeleteConfirm = false
 
@@ -52,6 +49,7 @@ struct TaskDetailView: View {
         }
         .background(Color(.secondarySystemGroupedBackground))
         .ignoresSafeArea(edges: .top)
+        .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
         .sheet(isPresented: $showEditSheet) {
             EditTaskSheet(task: $task)
@@ -59,10 +57,9 @@ struct TaskDetailView: View {
         .alert("Delete task?", isPresented: $showDeleteConfirm) {
             Button("Cancel", role: .cancel) {}
             Button("Delete", role: .destructive) {
-                // Cancel notification before deleting the task
                 NotificationManager.shared.cancelNotification(taskId: task.id)
                 onDelete()
-                dismiss()
+                onBack()
             }
         } message: {
             Text("This cannot be undone.")
@@ -83,14 +80,16 @@ struct TaskDetailView: View {
 
             VStack(alignment: .leading, spacing: 12) {
                 Button {
-                    dismiss()
+                    onBack()
                 } label: {
                     Image(systemName: "chevron.left")
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(.white)
-                        .padding(8)
+                        .frame(width: 44, height: 44)  // ← bigger tap target
+                        .contentShape(Rectangle())       // ← makes full area tappable
                 }
                 .accessibilityLabel("Back")
+                .zIndex(1)                               // ← ensure it's on top
 
                 Text(task.title)
                     .font(.title.bold())
@@ -126,7 +125,7 @@ struct TaskDetailView: View {
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.top, 8)
+            .padding(.top, 56)    // ← push content below the safe area / status bar
             .padding(.bottom, 24)
         }
     }
@@ -216,8 +215,6 @@ struct TaskDetailView: View {
             Spacer()
             Button {
                 task.isCompleted.toggle()
-
-                // Cancel notification if completed, reschedule if uncompleted
                 if task.isCompleted {
                     NotificationManager.shared.cancelNotification(taskId: task.id)
                 } else {
@@ -250,8 +247,14 @@ struct TaskDetailView: View {
 #Preview {
     NavigationStack {
         TaskDetailView(
-            task: .constant(Task.sampleTasks[0]),
-            onDelete: {}
+            task: .constant(Task(
+                title: "Mobile App Assignment",
+                dueDate: Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
+                type: .assignment,
+                notes: "Complete the UI design milestone"
+            )),
+            onDelete: {},
+            onBack: {}
         )
     }
     .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
