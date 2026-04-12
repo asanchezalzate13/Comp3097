@@ -1,6 +1,28 @@
 import SwiftUI
 import CoreData
 
+enum TaskFilter: String, CaseIterable {
+    case all = "All"
+    case pending = "Pending"
+    case completed = "Completed"
+}
+
+enum SortOption: String, CaseIterable {
+    case dueDateAsc  = "Due Date (Earliest)"
+    case dueDateDesc = "Due Date (Latest)"
+    case titleAZ     = "Title (A–Z)"
+    case type        = "Type"
+
+    var icon: String {
+        switch self {
+        case .dueDateAsc:  return "arrow.up.circle"
+        case .dueDateDesc: return "arrow.down.circle"
+        case .titleAZ:     return "textformat.abc"
+        case .type:        return "tag"
+        }
+    }
+}
+
 struct TaskListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -13,6 +35,10 @@ struct TaskListView: View {
     @State private var showAddTask = false
     @State private var taskToEdit: Task? = nil
     @State private var navigationPath = NavigationPath()
+    @State private var searchText = ""
+    @State private var selectedFilter: TaskFilter = .all
+    @State private var selectedTypeFilter: TaskType? = nil
+    @State private var selectedSort: SortOption = .dueDateAsc
 
     private var pendingCount: Int {
         taskEntities.filter { !$0.isCompleted }.count
@@ -22,6 +48,34 @@ struct TaskListView: View {
         taskEntities.filter { $0.isCompleted }.count
     }
 
+    private var filteredTasks: [TaskEntity] {
+        let filtered = taskEntities.filter { entity in
+            let matchesSearch = searchText.isEmpty ||
+                (entity.title ?? "").localizedCaseInsensitiveContains(searchText)
+            let matchesStatus: Bool
+            switch selectedFilter {
+            case .all:       matchesStatus = true
+            case .pending:   matchesStatus = !entity.isCompleted
+            case .completed: matchesStatus = entity.isCompleted
+            }
+            let matchesType = selectedTypeFilter == nil ||
+                entity.taskType == selectedTypeFilter?.rawValue
+            return matchesSearch && matchesStatus && matchesType
+        }
+        return filtered.sorted { a, b in
+            switch selectedSort {
+            case .dueDateAsc:
+                return (a.dueDate ?? .distantFuture) < (b.dueDate ?? .distantFuture)
+            case .dueDateDesc:
+                return (a.dueDate ?? .distantFuture) > (b.dueDate ?? .distantFuture)
+            case .titleAZ:
+                return (a.title ?? "") < (b.title ?? "")
+            case .type:
+                return (a.taskType ?? "") < (b.taskType ?? "")
+            }
+        }
+    }
+
     var body: some View {
         NavigationStack(path: $navigationPath) {
             mainColumn
@@ -29,6 +83,7 @@ struct TaskListView: View {
                     detailView(for: taskId)
                 }
                 .navigationBarTitleDisplayMode(.inline)
+                .searchable(text: $searchText, prompt: "Search tasks")
                 .sheet(isPresented: $showAddTask) {
                     AddTaskSheet()
                 }
@@ -41,7 +96,9 @@ struct TaskListView: View {
     private var mainColumn: some View {
         VStack(spacing: 0) {
             headerBar
-            if taskEntities.isEmpty {
+            filterPicker
+            typeFilterChips
+            if filteredTasks.isEmpty {
                 emptyState
             } else {
                 taskList
@@ -60,42 +117,98 @@ struct TaskListView: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            Button {
-                showAddTask = true
-            } label: {
-                Image(systemName: "plus.circle.fill")
-                    .font(.title)
+            HStack(spacing: 12) {
+                Menu {
+                    ForEach(SortOption.allCases, id: \.self) { option in
+                        Button {
+                            selectedSort = option
+                        } label: {
+                            Label(option.rawValue, systemImage: selectedSort == option ? "checkmark" : option.icon)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                        .font(.title2)
+                }
+                Button {
+                    showAddTask = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title)
+                }
             }
         }
         .padding()
     }
 
+    private var filterPicker: some View {
+        Picker("Filter", selection: $selectedFilter) {
+            ForEach(TaskFilter.allCases, id: \.self) { filter in
+                Text(filter.rawValue).tag(filter)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding(.horizontal)
+        .padding(.bottom, 8)
+    }
+
+    private var typeFilterChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                typeChip(label: "All Types", type: nil)
+                ForEach(TaskType.allCases, id: \.self) { type in
+                    typeChip(label: type.displayName, type: type)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 10)
+        }
+    }
+
+    private func typeChip(label: String, type: TaskType?) -> some View {
+        let isSelected = selectedTypeFilter == type
+        return Button {
+            selectedTypeFilter = type
+        } label: {
+            Text(label)
+                .font(.subheadline.weight(.medium))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(isSelected ? Color.blue : Color(.tertiarySystemGroupedBackground))
+                .foregroundStyle(isSelected ? .white : .primary)
+                .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+
     private var emptyState: some View {
         VStack(spacing: 20) {
             Spacer()
-            Image(systemName: "tray")
+            Image(systemName: searchText.isEmpty ? "tray" : "magnifyingglass")
                 .font(.system(size: 64))
                 .foregroundColor(.secondary)
 
-            Text("No tasks yet")
+            Text(searchText.isEmpty ? "No tasks yet" : "No results")
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text("Get started by adding your first task")
+            Text(searchText.isEmpty ? "Get started by adding your first task" : "Try a different search or filter")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
-            Button(action: {
-                showAddTask = true
-            }) {
-                Text("Add Your First Task")
-                    .fontWeight(.semibold)
-                    .frame(width: 220, height: 50)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+            if searchText.isEmpty && selectedFilter == .all {
+                Button(action: {
+                    showAddTask = true
+                }) {
+                    Text("Add Your First Task")
+                        .fontWeight(.semibold)
+                        .frame(width: 220, height: 50)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
             }
             Spacer()
         }
@@ -104,7 +217,7 @@ struct TaskListView: View {
 
     private var taskList: some View {
         List {
-            ForEach(Array(taskEntities), id: \.objectID) { entity in
+            ForEach(filteredTasks, id: \.objectID) { entity in
                 taskRow(entity: entity)
             }
         }

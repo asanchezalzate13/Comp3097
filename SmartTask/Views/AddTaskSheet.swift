@@ -9,19 +9,19 @@ struct AddTaskSheet: View {
     @State private var dueDate = Date()
     @State private var selectedType: TaskType = .assignment
     @State private var notes = ""
-    
+
     private var canSave: Bool {
         !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
-    
+
     var body: some View {
         NavigationStack {
             Form {
                 Section("Task Details") {
                     TextField("Title", text: $title)
-                    
+
                     DatePicker("Due Date", selection: $dueDate, displayedComponents: [.date, .hourAndMinute])
-                    
+
                     Picker("Type", selection: $selectedType) {
                         ForEach(TaskType.allCases, id: \.self) { type in
                             Text(type.displayName).tag(type)
@@ -29,7 +29,7 @@ struct AddTaskSheet: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                
+
                 Section("Notes") {
                     TextEditor(text: $notes)
                         .frame(minHeight: 80)
@@ -52,29 +52,18 @@ struct AddTaskSheet: View {
             }
         }
     }
-    
+
     private func saveTask() {
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
-        let newTask = TaskEntity(
-                context: viewContext,
-                title: trimmedTitle,
-                dueDate: dueDate,
-                type: selectedType,
-                notes: notes
-            )
+        let entity = TaskEntity(context: viewContext, title: trimmedTitle, dueDate: dueDate, type: selectedType, notes: notes)
         PersistenceController.shared.save()
-            
-            // Schedule notification for the new task
-            if let taskId = newTask.id {
-                NotificationManager.shared.scheduleNotification(
-                    taskId: taskId,
-                    title: trimmedTitle,
-                    dueDate: dueDate
-                )
-            }
-            
-            dismiss()
+
+        if let id = entity.id {
+            NotificationManager.shared.scheduleNotification(taskId: id, title: trimmedTitle, dueDate: dueDate)
         }
+
+        dismiss()
+    }
 }
