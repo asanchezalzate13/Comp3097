@@ -21,6 +21,7 @@ struct TaskListView: View {
     @State private var navigationPath = NavigationPath()
     @State private var searchText = ""
     @State private var selectedFilter: TaskFilter = .all
+    @State private var selectedTypeFilter: TaskType? = nil
 
     private var pendingCount: Int {
         taskEntities.filter { !$0.isCompleted }.count
@@ -34,13 +35,15 @@ struct TaskListView: View {
         taskEntities.filter { entity in
             let matchesSearch = searchText.isEmpty ||
                 (entity.title ?? "").localizedCaseInsensitiveContains(searchText)
-            let matchesFilter: Bool
+            let matchesStatus: Bool
             switch selectedFilter {
-            case .all:       matchesFilter = true
-            case .pending:   matchesFilter = !entity.isCompleted
-            case .completed: matchesFilter = entity.isCompleted
+            case .all:       matchesStatus = true
+            case .pending:   matchesStatus = !entity.isCompleted
+            case .completed: matchesStatus = entity.isCompleted
             }
-            return matchesSearch && matchesFilter
+            let matchesType = selectedTypeFilter == nil ||
+                entity.taskType == selectedTypeFilter?.rawValue
+            return matchesSearch && matchesStatus && matchesType
         }
     }
 
@@ -65,6 +68,7 @@ struct TaskListView: View {
         VStack(spacing: 0) {
             headerBar
             filterPicker
+            typeFilterChips
             if filteredTasks.isEmpty {
                 emptyState
             } else {
@@ -103,6 +107,35 @@ struct TaskListView: View {
         .pickerStyle(.segmented)
         .padding(.horizontal)
         .padding(.bottom, 8)
+    }
+
+    private var typeFilterChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                typeChip(label: "All Types", type: nil)
+                ForEach(TaskType.allCases, id: \.self) { type in
+                    typeChip(label: type.displayName, type: type)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 10)
+        }
+    }
+
+    private func typeChip(label: String, type: TaskType?) -> some View {
+        let isSelected = selectedTypeFilter == type
+        return Button {
+            selectedTypeFilter = type
+        } label: {
+            Text(label)
+                .font(.subheadline.weight(.medium))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(isSelected ? Color.blue : Color(.tertiarySystemGroupedBackground))
+                .foregroundStyle(isSelected ? .white : .primary)
+                .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
     }
 
     private var emptyState: some View {
