@@ -1,9 +1,11 @@
 import SwiftUI
 import CoreData
 
-struct AddTaskSheet: View {
+struct EditTaskSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
+
+    @Binding var task: Task
 
     @State private var title = ""
     @State private var dueDate = Date()
@@ -35,7 +37,7 @@ struct AddTaskSheet: View {
                         .frame(minHeight: 80)
                 }
             }
-            .navigationTitle("Add Task")
+            .navigationTitle("Edit Task")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -45,23 +47,53 @@ struct AddTaskSheet: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        saveTask()
+                        saveChanges()
                     }
                     .disabled(!canSave)
                 }
             }
+            .onAppear {
+                title        = task.title
+                dueDate      = task.dueDate
+                selectedType = task.type
+                notes        = task.notes
+            }
         }
     }
 
-    private func saveTask() {
+    private func saveChanges() {
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
-        let entity = TaskEntity(context: viewContext, title: trimmedTitle, dueDate: dueDate, type: selectedType, notes: notes)
-        PersistenceController.shared.save()
+        // Fetch the Core Data entity directly and update it
+        let request: NSFetchRequest<TaskEntity> = TaskEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", task.id as CVarArg)
+        request.fetchLimit = 1
 
-        if let id = entity.id {
-            NotificationManager.shared.scheduleNotification(taskId: id, title: trimmedTitle, dueDate: dueDate)
+        do {
+            let results = try viewContext.fetch(request)
+            if let entity = results.first {
+                entity.title    = trimmedTitle
+                entity.dueDate  = dueDate
+                entity.taskType = selectedType.rawValue
+                entity.notes    = notes
+
+                // Update the binding so detail view reflects changes immediately
+                task.title   = trimmedTitle
+                task.dueDate = dueDate
+                task.type    = selectedType
+                task.notes   = notes
+
+                PersistenceController.shared.save()
+
+                NotificationManager.shared.scheduleNotification(
+                    taskId: task.id,
+                    title: trimmedTitle,
+                    dueDate: dueDate
+                )
+            }
+        } catch {
+            print("Failed to fetch task for editing: \(error)")
         }
 
         dismiss()
