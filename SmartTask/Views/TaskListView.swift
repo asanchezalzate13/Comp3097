@@ -7,6 +7,22 @@ enum TaskFilter: String, CaseIterable {
     case completed = "Completed"
 }
 
+enum SortOption: String, CaseIterable {
+    case dueDateAsc  = "Due Date (Earliest)"
+    case dueDateDesc = "Due Date (Latest)"
+    case titleAZ     = "Title (A–Z)"
+    case type        = "Type"
+
+    var icon: String {
+        switch self {
+        case .dueDateAsc:  return "arrow.up.circle"
+        case .dueDateDesc: return "arrow.down.circle"
+        case .titleAZ:     return "textformat.abc"
+        case .type:        return "tag"
+        }
+    }
+}
+
 struct TaskListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -22,6 +38,7 @@ struct TaskListView: View {
     @State private var searchText = ""
     @State private var selectedFilter: TaskFilter = .all
     @State private var selectedTypeFilter: TaskType? = nil
+    @State private var selectedSort: SortOption = .dueDateAsc
 
     private var pendingCount: Int {
         taskEntities.filter { !$0.isCompleted }.count
@@ -32,7 +49,7 @@ struct TaskListView: View {
     }
 
     private var filteredTasks: [TaskEntity] {
-        taskEntities.filter { entity in
+        let filtered = taskEntities.filter { entity in
             let matchesSearch = searchText.isEmpty ||
                 (entity.title ?? "").localizedCaseInsensitiveContains(searchText)
             let matchesStatus: Bool
@@ -44,6 +61,18 @@ struct TaskListView: View {
             let matchesType = selectedTypeFilter == nil ||
                 entity.taskType == selectedTypeFilter?.rawValue
             return matchesSearch && matchesStatus && matchesType
+        }
+        return filtered.sorted { a, b in
+            switch selectedSort {
+            case .dueDateAsc:
+                return (a.dueDate ?? .distantFuture) < (b.dueDate ?? .distantFuture)
+            case .dueDateDesc:
+                return (a.dueDate ?? .distantFuture) > (b.dueDate ?? .distantFuture)
+            case .titleAZ:
+                return (a.title ?? "") < (b.title ?? "")
+            case .type:
+                return (a.taskType ?? "") < (b.taskType ?? "")
+            }
         }
     }
 
@@ -88,11 +117,25 @@ struct TaskListView: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            Button {
-                showAddTask = true
-            } label: {
-                Image(systemName: "plus.circle.fill")
-                    .font(.title)
+            HStack(spacing: 12) {
+                Menu {
+                    ForEach(SortOption.allCases, id: \.self) { option in
+                        Button {
+                            selectedSort = option
+                        } label: {
+                            Label(option.rawValue, systemImage: selectedSort == option ? "checkmark" : option.icon)
+                        }
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                        .font(.title2)
+                }
+                Button {
+                    showAddTask = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title)
+                }
             }
         }
         .padding()
